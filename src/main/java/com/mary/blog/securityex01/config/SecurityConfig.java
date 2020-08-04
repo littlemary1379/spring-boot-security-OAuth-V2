@@ -1,6 +1,7 @@
 
 package com.mary.blog.securityex01.config;
 
+import org.omg.CORBA.Principal;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
@@ -8,6 +9,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import com.mary.blog.securityex01.config.oauth.PrincipalOauth2UserService;
 
 // IoC 빈(객체) 등록
 @Configuration
@@ -39,6 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 			.formLogin()
 			.loginPage("/login")
 			.loginProcessingUrl("/loginProc")
-			.defaultSuccessUrl("/");
+			.defaultSuccessUrl("/")
+		.and()
+			.oauth2Login()
+			.loginPage("/login")
+			.userInfoEndpoint()
+			.userService(new PrincipalOauth2UserService());
 	}
 }

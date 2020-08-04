@@ -14,11 +14,20 @@ spring:
     username: cos
     password: cos1234
 
-
-     
   jpa:
     hibernate:
       ddl-auto: update #create #update #none
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true   
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:  #/oauth2/authorization/google
+            client-id: 347873575612-nhsjs6gocobr1c44hs9u0v2qms5j8m2a.apps.googleusercontent.com
+            client-secret: 3akKdXhgTeaC2v5as-MUCkQk
+            scope:
+            - email
+            - profile
